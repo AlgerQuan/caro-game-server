@@ -1,0 +1,15 @@
+[service]
+  startCommand = "python main.py"
+  
+[deploy]
+  healthCheckPath = "/health"
+  healthCheckTimeout = 300
+  restartPolicyType = "ON_FAILURE"
+
+[[services.ports]]
+  port = 5000
+  http = true
+
+[[services.ports]]  
+  port = 8080
+  http = true
