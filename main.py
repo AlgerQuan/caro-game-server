@@ -1,13 +1,15 @@
 from flask import Flask
+from flask_cors import CORS
 import os
 
 app = Flask(__name__)
+CORS(app)  # THÊM DÒNG NÀY
 
 @app.route('/')
 def home():
     return "Caro Game Server is Running!"
 
-@app.route('/health', methods=['GET', 'HEAD'])
+@app.route('/health')
 def health():
     return "OK", 200
 
@@ -15,7 +17,6 @@ def health():
 def status():
     return {"status": "running", "port": os.environ.get('PORT', '5000')}, 200
 
-# Railway đang set PORT=8080
 port = int(os.environ.get('PORT', 5000))
 
 if __name__ == '__main__':
