@@ -9,11 +9,16 @@ def home():
 
 @app.route('/health')
 def health():
-    return "OK"
+    return "OK", 200
+
+@app.route('/api/test')
+def test():
+    return {"status": "success", "message": "Server is working"}, 200
+
+# QUAN TRỌNG: Dùng biến môi trường PORT
+port = int(os.environ.get('PORT', 5000))
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=False)
 
-# THÊM DÒNG NÀY Ở CUỐI FILE
 application = app
