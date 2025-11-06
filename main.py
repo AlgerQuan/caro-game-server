@@ -1,7 +1,9 @@
 from flask import Flask
-import os
+from flask_socketio import SocketIO
+import eventlet
 
 app = Flask(__name__)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 @app.route('/')
 def home():
@@ -11,10 +13,6 @@ def home():
 def health():
     return "OK"
 
-@app.route('/api/status')
-def status():
-    return {"status": "running"}
-
-# REPLIT CẦN CÁI NÀY
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    print("🚀 Server starting...")
+    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
